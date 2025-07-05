@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleExecutable</key>
+    <string>claude-monitor-macos</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.sapeet.claude-usage-monitor</string>
+    <key>CFBundleName</key>
+    <string>Claude Code Usage Monitor</string>
+    <key>CFBundleDisplayName</key>
+    <string>Claude Code Usage Monitor</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>13.0</string>
+    <key>NSHighResolutionCapable</key>
+    <true/>
+    <key>LSUIElement</key>
+    <true/>
+    <key>NSAppleEventsUsageDescription</key>
+    <string>Claude Code Usage Monitor needs to access system events to monitor usage.</string>
+    <key>NSHumanReadableCopyright</key>
+    <string>Copyright © 2025 Sapeet inc. All rights reserved.</string>
+    <key>LSApplicationCategoryType</key>
+    <string>public.app-category.developer-tools</string>
+    <key>NSRequiresAquaSystemAppearance</key>
+    <false/>
+    <key>NSPrincipalClass</key>
+    <string>NSApplication</string>
+    <key>LSArchitecturePriority</key>
+    <array>
+        <string>arm64</string>
+        <string>x86_64</string>
+    </array>
+</dict>
+</plist>

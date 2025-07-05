@@ -1,0 +1,37 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Swift and Xcode
+.build/
+.build_arm64/
+.build_x86_64/
+DerivedData/
+*.xcodeproj
+*.xcworkspace
+Package.resolved
+.swiftpm/
+
+# Build outputs
+output/
+*.app/
+*.zip
+*.dmg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Test executables
+Test*
+!Test*.swift
