@@ -284,7 +284,8 @@ class ClaudeUsageMonitor: ObservableObject {
         for block in sessionBlocks where !block.isGap {
             // セッションの実際の終了時刻（最後のエントリまたは現在時刻）
             let sessionActualEnd = block.isActive ? now : block.actualEndTime
-            let sessionStart = block.firstEntry?.timestamp ?? block.startTime
+            // Python実装に合わせて、常に丸められた開始時刻を使用
+            let sessionStart = block.startTime
             
             // セッションが過去1時間と重複する部分を計算
             let sessionStartInHour = max(sessionStart, oneHourAgo)
