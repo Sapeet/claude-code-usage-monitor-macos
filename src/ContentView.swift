@@ -43,9 +43,9 @@ struct HeaderView: View {
     
     var displayPlanText: String {
         if monitor.isManualPlanMode {
-            return "\(monitor.planType) (Manual)"
+            return "\(monitor.planType.rawValue) (Manual)"
         } else {
-            return monitor.planType
+            return monitor.planType.rawValue
         }
     }
     
@@ -83,17 +83,17 @@ struct HeaderView: View {
                     Button("Pro") {
                         monitor.setPlanType("Pro")
                     }
-                    .disabled(monitor.isManualPlanMode && monitor.planType == "Pro")
+                    .disabled(monitor.isManualPlanMode && monitor.planType == .pro)
                     
                     Button("Max5") {
                         monitor.setPlanType("Max5")
                     }
-                    .disabled(monitor.isManualPlanMode && monitor.planType == "Max5")
+                    .disabled(monitor.isManualPlanMode && monitor.planType == .max5)
                     
                     Button("Max20") {
                         monitor.setPlanType("Max20")
                     }
-                    .disabled(monitor.isManualPlanMode && monitor.planType == "Max20")
+                    .disabled(monitor.isManualPlanMode && monitor.planType == .max20)
                 } label: {
                     Text("Plan: \(displayPlanText)")
                         .font(.caption)
@@ -197,7 +197,7 @@ struct TokenUsageView: View {
                 .font(.headline)
             
             ProgressView(value: Double(monitor.currentTokens), total: Double(monitor.tokenLimit))
-                .progressViewStyle(ColoredProgressViewStyle(color: monitor.getUsageColor()))
+                .progressViewStyle(ColoredProgressViewStyle(color: Color(monitor.getUsageColor())))
             
             HStack {
                 Text("\(monitor.currentTokens.formatted()) / \(monitor.tokenLimit.formatted())")
