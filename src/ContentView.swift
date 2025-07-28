@@ -315,7 +315,7 @@ struct PredictionView: View {
                 Spacer()
                 
                 VStack(alignment: .trailing) {
-                    Text("Will Last")
+                    Text("Exhausts At")
                         .font(.caption)
                         .foregroundColor(.secondary)
                     
@@ -353,16 +353,17 @@ struct ColoredProgressViewStyle: ProgressViewStyle {
     func makeBody(configuration: Configuration) -> some View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
-                Rectangle()
+                // Background
+                RoundedRectangle(cornerRadius: 10)
                     .fill(Color.gray.opacity(0.3))
                     .frame(height: 20)
-                    .cornerRadius(10)
                 
-                Rectangle()
+                // Progress bar with clipping
+                RoundedRectangle(cornerRadius: 10)
                     .fill(color)
                     .frame(width: geometry.size.width * (configuration.fractionCompleted ?? 0), height: 20)
-                    .cornerRadius(10)
             }
+            .clipShape(RoundedRectangle(cornerRadius: 10)) // Additional safety clipping
         }
         .frame(height: 20)
     }

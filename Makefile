@@ -1,7 +1,7 @@
 # claude-code-usage-monitor-macos Makefile
 
 # Variables
-APP_NAME = Claude Code Usage Monitor
+APP_NAME = Claude Monitor
 EXEC_NAME = claude-monitor-macos
 
 BUILD = .build

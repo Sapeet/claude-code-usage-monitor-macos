@@ -170,7 +170,7 @@ struct SessionCalculator {
         }
     }
     
-    // 残り時間計算
+    // 残り時間計算（トークンが枯渇する時刻を返す）
     func calculateTimeRemaining(currentTokens: Int, tokenLimit: Int, burnRate: Double, sessionEndTime: Date) -> String {
         guard currentTokens < tokenLimit else {
             return "Exceeded"
@@ -182,18 +182,13 @@ struct SessionCalculator {
         
         let tokensLeft = tokenLimit - currentTokens
         let minutesRemaining = Double(tokensLeft) / burnRate
-        let minutesUntilReset = sessionEndTime.timeIntervalSince(Date()) / 60.0
-        let effectiveMinutesRemaining = min(minutesRemaining, minutesUntilReset)
+        let exhaustionTime = Date().addingTimeInterval(minutesRemaining * 60)
         
-        if effectiveMinutesRemaining < 0 {
-            return "Exceeded"
-        } else if effectiveMinutesRemaining > 300 {
-            return "5h+"
-        } else {
-            let hours = Int(effectiveMinutesRemaining) / 60
-            let minutes = Int(effectiveMinutesRemaining) % 60
-            return String(format: "%dh %dm", hours, minutes)
-        }
+        // トークンが枯渇する時刻を表示（セッションリセット時刻に関係なく）
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        formatter.timeZone = TimeZone.current
+        return formatter.string(from: exhaustionTime)
     }
     
     // MARK: - Private Helpers
