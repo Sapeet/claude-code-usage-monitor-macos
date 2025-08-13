@@ -1,5 +1,9 @@
 # Claude Code Usage Monitor for macOS
 
+<p align="center">
+  <img width="463" height="628" alt="スクリーンショット 2025-07-16 20 23 14" src="https://github.com/user-attachments/assets/b6be05bd-09f1-40f8-a8d8-fc413f79f9e4"/>
+</p>
+
 A native macOS menu bar application that monitors Claude Code token usage in real-time.
 
 This is a Swift/macOS adaptation of [Claude-Code-Usage-Monitor](https://github.com/Maciek-roboblog/Claude-Code-Usage-Monitor) by Maciek-roboblog, adding a native GUI for macOS users.
