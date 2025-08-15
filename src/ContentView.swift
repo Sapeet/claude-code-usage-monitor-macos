@@ -1,4 +1,5 @@
 import SwiftUI
+import ServiceManagement
 
 struct ContentView: View {
     @EnvironmentObject var monitor: ClaudeUsageMonitor
@@ -24,14 +25,18 @@ struct ContentView: View {
                         PredictionView()
                     } else {
                         NoSessionView()
+                            .frame(height: 470)
                     }
+
+                    // Launch at login toggle at bottom
+                    LaunchAtLoginView()
                 }
                 .padding(.horizontal)
                 .padding(.bottom)
                 .padding(.top, 8)
             }
         }
-        .frame(width: 400, height: 565)
+        .frame(width: 400, height: 620)
     }
 }
 
@@ -407,6 +412,63 @@ struct NoSessionView: View {
             .cornerRadius(8)
         }
         .padding()
+    }
+}
+
+struct LaunchAtLoginView: View {
+    @State private var launchAtLogin = false
+    
+    var body: some View {
+        HStack {
+            Text("Launch at login")
+                .font(.body)
+            
+            Spacer()
+            
+            Toggle("", isOn: $launchAtLogin)
+                .toggleStyle(SwitchToggleStyle(tint: .accentColor))
+                .scaleEffect(0.8)
+                .onChange(of: launchAtLogin) { newValue in
+                    setLaunchAtLogin(newValue)
+                }
+        }
+        .padding(.vertical, 8)
+        .padding(.horizontal, 12)
+        .background(Color.gray.opacity(0.1))
+        .cornerRadius(8)
+        .onAppear {
+            checkLaunchAtLoginStatus()
+        }
+    }
+    
+    private func checkLaunchAtLoginStatus() {
+        if #available(macOS 13.0, *) {
+            launchAtLogin = SMAppService.mainApp.status == .enabled
+        }
+    }
+    
+    private func setLaunchAtLogin(_ enabled: Bool) {
+        if #available(macOS 13.0, *) {
+            do {
+                if enabled {
+                    if SMAppService.mainApp.status == .enabled {
+                        print("Launch at login is already enabled")
+                    } else {
+                        try SMAppService.mainApp.register()
+                        print("Launch at login enabled successfully")
+                    }
+                } else {
+                    if SMAppService.mainApp.status == .enabled {
+                        try SMAppService.mainApp.unregister()
+                        print("Launch at login disabled successfully")
+                    } else {
+                        print("Launch at login is already disabled")
+                    }
+                }
+            } catch {
+                print("Failed to set launch at login: \(error)")
+            }
+        }
     }
 }
 
