@@ -37,6 +37,7 @@ class PopoverController {
     private func show() {
         guard let button = statusButton else { return }
         popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+        popover.contentViewController?.view.window?.makeKey()
         eventMonitor?.start()
     }
     
